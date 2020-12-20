@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         darkBackground: '#222429',
         inputColor: '#191B1F',
+        hoverColor: '#2A2D33',
       },
     },
   },

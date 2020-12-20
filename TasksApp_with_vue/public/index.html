@@ -25,8 +25,9 @@
                         <h5 class=" pl-3 pb-3 text-xs text-red-700">You have {{tasks.length}} tasks
                             remaining</h5>
                         <!-- Tasks list goes here -->
-                        <ul class="text-sm text-gray-300 pl-3">
-                            <li class="mb-2 flex items-center" v-for="(task, index) in tasks" :key="index">
+                        <ul class="text-sm text-gray-300">
+                            <li class="mb-2 pl-3 py-2 flex items-center hover:bg-hoverColor"
+                                v-for="(task, index) in tasks" :key="index">
                                 <!-- checkbox -->
                                 <input type="checkbox" class="mr-3 form-checkbox h-3 w-3" :value=task
                                     @change="check($event, task, index)" v-model="taskArray" />
@@ -34,7 +35,7 @@
                                 <span :class=" {'line-through': task.completed}">{{task.enteredTask}}
 
                                 </span>
-                                <i class="fas fa-trash-alt ml-auto" @click="deleteTask(index)"></i>
+                                <i class="fas fa-trash-alt ml-auto pr-2" @click="deleteTask(index)"></i>
                             </li>
 
 
@@ -49,7 +50,8 @@
                             Completed
                         </h6>
                         <ul class="text-sm text-gray-300 pl-3">
-                            <li class="mb-2 flex items-center" v-for="(task, index) in completedTasks" :key="index">
+                            <li class="mb-2 pl-3 py-2 flex items-center hover:bg-hoverColor"
+                                v-for="(task, index) in completedTasks" :key="index">
                                 <!-- checkbox -->
                                 <input type="checkbox" class="mr-3 form-checkbox h-3 w-3 text-green-700" :value=task
                                     @change="uncompleteTask($event, task, index)" v-model="task.completed" />

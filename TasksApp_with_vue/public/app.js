@@ -10,6 +10,7 @@ const app = Vue.createApp({
       completedTasks: [],
     };
   },
+  watch: {},
 
   methods: {
     addTask() {
@@ -22,7 +23,7 @@ const app = Vue.createApp({
       this.enteredTask = '';
       console.log(this.tasks);
     },
-    check(e, task, index) {
+    selectCheckbox(e, task, index) {
       // when checkbox is checked, assigned that value to task.completed
       task.completed = e.target.checked;
       // when checkbox is checked - add task to completed task array
@@ -31,8 +32,11 @@ const app = Vue.createApp({
         completed: task.completed,
       });
 
-      // Also remove the checked task from the task array
-      this.tasks.splice(index, 1);
+      // Also remove the checked task from the task array after
+      const that = this;
+      setTimeout(() => {
+        that.tasks.splice(index, 1);
+      }, 400);
     },
     // delete task
     deleteTask(taskIndex) {

@@ -5,11 +5,17 @@ module.exports = {
     extend: {
       fontFamily: {
         jetBrains: ['JetBrains Mono', 'monospace'],
+        padauk: ['Padauk', 'sans-serif'],
+        abel: ['Padauk', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
       colors: {
         darkBackground: '#222429',
         inputColor: '#191B1F',
         hoverColor: '#2A2D33',
+      },
+      borderWidth: {
+        1: '.4px',
       },
     },
   },

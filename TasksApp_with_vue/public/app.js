@@ -3,25 +3,39 @@ const app = Vue.createApp({
     return {
       enteredTask: '',
       // Task to loop over
-      tasks: [],
+      tasks: [
+        {
+          enteredTask: 'Finish Vue',
+          completed: false,
+          editing: false,
+        },
+      ],
       // list of checkboxes
       taskArray: [],
       // completed task array
       completedTasks: [],
     };
   },
-  watch: {},
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus();
+      },
+    },
+  },
 
   methods: {
     addTask() {
-      // push newly entered task to tasks array
+      if (this.enteredTask.trim().length === 0) {
+        return;
+      }
       this.tasks.push({
         enteredTask: this.enteredTask,
         completed: false,
       });
+
       // Clear the input
       this.enteredTask = '';
-      console.log(this.tasks);
     },
     selectCheckbox(e, task, index) {
       // when checkbox is checked, assigned that value to task.completed
@@ -32,7 +46,7 @@ const app = Vue.createApp({
         completed: task.completed,
       });
 
-      // Also remove the checked task from the task array after
+      // Also remove the checked task from the task array after x delay
       const that = this;
       setTimeout(() => {
         that.tasks.splice(index, 1);
@@ -52,7 +66,20 @@ const app = Vue.createApp({
         completed: false,
       });
       // Remove it from the completed task array
-      this.completedTasks.splice(index, 1);
+      const that = this;
+      setTimeout(() => {
+        that.completedTasks.splice(index, 1);
+      }, 400);
+    },
+
+    editTask(task) {
+      // Change the editing state
+      task.editing = !task.editing;
+      this.$nextTick(() => this.$refs.input.focus());
+    },
+    doneEdit(task) {
+      // Also change the editing state
+      task.editing = !task.editing;
     },
   },
 });

@@ -75,7 +75,7 @@ const app = Vue.createApp({
     },
     doneEdit(task) {
       // if empty string, set task to before edit task
-      if (this.enteredTask.trim().length === 0) {
+      if (task.enteredTask.trim().length === 0) {
         task.enteredTask = this.beforeEdit;
       }
       task.editing = !task.editing;

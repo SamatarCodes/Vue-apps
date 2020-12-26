@@ -2,6 +2,7 @@ const app = Vue.createApp({
   data() {
     return {
       enteredTask: '',
+      beforeEdit: '',
       // Task to loop over
       tasks: [
         {
@@ -15,13 +16,6 @@ const app = Vue.createApp({
       // completed task array
       completedTasks: [],
     };
-  },
-  directives: {
-    focus: {
-      inserted(el) {
-        el.focus();
-      },
-    },
   },
 
   methods: {
@@ -73,13 +67,20 @@ const app = Vue.createApp({
     },
 
     editTask(task) {
+      // Grab the data before it's edited
+      this.beforeEdit = task.enteredTask;
       // Change the editing state
       task.editing = !task.editing;
       this.$nextTick(() => this.$refs.input.focus());
     },
     doneEdit(task) {
-      // Also change the editing state
+      //  change the editing state as completed
       task.editing = !task.editing;
+    },
+    cancelEdit(task) {
+      // Change the edit
+      task.editing = !task.editing;
+      task.enteredTask = this.beforeEdit;
     },
   },
 });

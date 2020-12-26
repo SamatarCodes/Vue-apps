@@ -45,7 +45,7 @@
                                     </div>
                                     <input v-else class="task-item-edit bg-transparent border w-60"
                                         @keyup.enter="doneEdit(task)" @blur="doneEdit(task)" type="text"
-                                        v-model="task.enteredTask" ref="input">
+                                        v-model="task.enteredTask" @keyup.esc="cancelEdit(task)" ref="input">
                                 </div>
                                 <i class="fas fa-trash-alt ml-auto pr-2" @click="deleteTask(index)"></i>
                             </li>

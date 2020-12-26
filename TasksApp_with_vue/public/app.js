@@ -74,7 +74,10 @@ const app = Vue.createApp({
       this.$nextTick(() => this.$refs.input.focus());
     },
     doneEdit(task) {
-      //  change the editing state as completed
+      // if empty string, set task to before edit task
+      if (this.enteredTask.trim().length === 0) {
+        task.enteredTask = this.beforeEdit;
+      }
       task.editing = !task.editing;
     },
     cancelEdit(task) {

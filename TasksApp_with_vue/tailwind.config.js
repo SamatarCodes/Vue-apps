@@ -13,6 +13,7 @@ module.exports = {
         darkBackground: '#222429',
         inputColor: '#191B1F',
         hoverColor: '#2A2D33',
+        sidebarColor: '#0F0F13',
       },
       borderWidth: {
         1: '.4px',

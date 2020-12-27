@@ -17,78 +17,88 @@
 
 <body>
     <main id="app">
-        <div class="font-roboto min-h-screen bg-gray-200 py-6 flex flex-col items-center justify-center sm:py-12">
-            <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-sm">
-                <!-- inbox container -->
-                <div class="inside-contatiner px-5">
-                    <div class="title flex items-center">
+        <div class="text-white font-roboto min-h-screen bg-gray-900  py-6 flex items-center justify-center sm:py-12 ">
+            <div class="container flex justify-center">
+                <div class="sidebar bg-sidebarColor">
+                    <div class="sidebar__inner pl-3 pr-10 pt-2 flex items-center">
                         <i class="far fa-list-alt mr-2"></i>
-                        <h4 class="py-4">Inbox</h4>
+                        <h3>Task Entry</h3>
                     </div>
-
-                    <!-- add new task input field -->
-                    <input type="text" class="bg-inputColor px-2 py-2 text-sm w-full text-white rounded-sm"
-                        placeholder="Add a new Task. Press Enter to save" v-model="enteredTask" @keyup.enter="addTask">
-                    <div class="overflow-y-auto mt-4 flex flex-col h-56">
-                        <h5 class=" pl-3 pb-3 text-xs text-red-700">You have {{tasks.length}} tasks
-                            remaining</h5>
-                        <!-- Tasks list goes here -->
-                        <ul class="text-sm text-gray-300 pr-2">
-                            <li class="border-b-1 border-gray-700  px-4 py-2 flex items-center hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500 "
-                                v-for="(task, index) in tasks" :key="index">
-                                <!-- checkbox -->
-                                <input type="checkbox"
-                                    class="mr-3 form-checkbox h-3 w-3 tex∂t-gray-700  bg-transparent  border border-gray-700 rounded-sm"
-                                    :value=task @change="selectCheckbox($event, task, index)" v-model="taskArray" />
-
-                                <div class="task-item-left">
-                                    <!-- show when we're not editing -->
-                                    <div v-if="!task.editing" @click="editTask(task)" class="task-item-label"
-                                        :class=" {'line-through': task.completed}">
-                                        {{task.enteredTask}}
-                                    </div>
-                                    <input v-else class="task-item-edit bg-transparent border w-60"
-                                        @keyup.enter="doneEdit(task)" @blur="doneEdit(task)" type="text"
-                                        v-model="task.enteredTask" @keyup.esc="cancelEdit(task)" ref="input">
-                                </div>
-                                <i class="fas fa-trash-alt ml-auto pr-2" @click="deleteTask(index)"></i>
-                            </li>
-
-
-
-                        </ul>
-
-                    </div>
-                    <!-- completed task section -->
-                    <section class="completed flex  h-40 flex-col overflow-y-auto   ">
-                        <h6 class=" pb-3 text-xs text-gray-500 flex items-center">
-                            <i class="mr-1 text-gray-400 fas fa-play fa-xs"></i>
-                            Completed
-                        </h6>
-                        <ul class="text-sm text-gray-300">
-                            <li class="border-b-1 border-gray-700 px-4  py-2 flex items-center hover:bg-hoverColor"
-                                v-for="(task, index) in completedTasks" :key="index">
-                                <!-- checkbox -->
-                                <input type="checkbox"
-                                    class="mr-3 form-checkbox h-3 w-3 text-gray-700  bg-transparent  border border-gray-700 rounded-sm "
-                                    :value=task @change="uncompleteTask($event, task, index)"
-                                    v-model="task.completed" />
-
-                                <span class="text-gray-600"
-                                    :class="{'line-through': task.completed}">{{task.completedTask}}
-
-                                </span>
-
-                            </li>
-
-
-
-                        </ul>
-
-                    </section>
                 </div>
+                <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-sm">
+                    <!-- inbox container -->
+                    <div class="inside-contatiner px-5">
+                        <div class="title flex items-center">
+
+                            <i class="fas fa-envelope mr-2"></i>
+                            <h4 class="py-4">Inbox</h4>
+                        </div>
+
+                        <!-- add new task input field -->
+                        <input type="text" class="bg-inputColor px-2 py-2 text-sm w-full text-white rounded-sm"
+                            placeholder="Add a new Task. Press Enter to save" v-model="enteredTask"
+                            @keyup.enter="addTask">
+                        <div class="overflow-y-auto mt-4 flex flex-col h-56">
+                            <h5 class=" pl-3 pb-3 text-xs text-red-700">You have {{tasks.length}} tasks
+                                remaining</h5>
+                            <!-- Tasks list goes here -->
+                            <ul class="text-sm text-gray-300 pr-2">
+                                <li class="border-b-1 border-gray-700  px-4 py-2 flex items-center hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500 "
+                                    v-for="(task, index) in tasks" :key="index">
+                                    <!-- checkbox -->
+                                    <input type="checkbox"
+                                        class="mr-3 form-checkbox h-3 w-3 tex∂t-gray-700  bg-transparent  border border-gray-700 rounded-sm"
+                                        :value=task @change="selectCheckbox($event, task, index)" v-model="taskArray" />
+
+                                    <div class="task-item-left">
+                                        <!-- show when we're not editing -->
+                                        <div v-if="!task.editing" @click="editTask(task)" class="task-item-label"
+                                            :class=" {'line-through': task.completed}">
+                                            {{task.enteredTask}}
+                                        </div>
+                                        <input v-else class="task-item-edit bg-transparent border w-60"
+                                            @keyup.enter="doneEdit(task)" @blur="doneEdit(task)" type="text"
+                                            v-model="task.enteredTask" @keyup.esc="cancelEdit(task)" ref="input">
+                                    </div>
+                                    <i class="fas fa-trash-alt ml-auto pr-2" @click="deleteTask(index)"></i>
+                                </li>
 
 
+
+                            </ul>
+
+                        </div>
+                        <!-- completed task section -->
+                        <section class="completed flex  h-40 flex-col overflow-y-auto   ">
+                            <h6 class=" pb-3 text-xs text-gray-500 flex items-center">
+                                <i class="mr-1 text-gray-400 fas fa-play fa-xs"></i>
+                                Completed
+                            </h6>
+                            <ul class="text-sm text-gray-300">
+                                <li class="border-b-1 border-gray-700 px-4  py-2 flex items-center hover:bg-hoverColor"
+                                    v-for="(task, index) in completedTasks" :key="index">
+                                    <!-- checkbox -->
+                                    <input type="checkbox"
+                                        class="mr-3 form-checkbox h-3 w-3 text-gray-700  bg-transparent  border border-gray-700 rounded-sm "
+                                        :value=task @change="uncompleteTask($event, task, index)"
+                                        v-model="task.completed" />
+
+                                    <span class="text-gray-600"
+                                        :class="{'line-through': task.completed}">{{task.completedTask}}
+
+                                    </span>
+
+                                </li>
+
+
+
+                            </ul>
+
+                        </section>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </main>

@@ -22,7 +22,8 @@ const app = Vue.createApp({
     checkDuplicateTask() {
       if (
         (this.enteredTask !== '') &
-        (this.enteredTask.toLowerCase() === this.duplicateCache.toLowerCase())
+        (this.enteredTask.trim().toLowerCase() ===
+          this.duplicateCache.toLowerCase())
       ) {
         return `This task '${this.duplicateCache}' already exist`;
       }
@@ -31,22 +32,21 @@ const app = Vue.createApp({
 
   methods: {
     addTask() {
-      if (this.enteredTask.trim().length === 0) {
-        return;
-      }
-
-      // Check if task already exist
+      // If empty task, return
       if (
+        this.enteredTask.trim().length === 0 ||
         this.enteredTask.toLowerCase() === this.duplicateCache.toLowerCase()
       ) {
         return;
       }
+
+      // Add the task to task array
       this.tasks.push({
         enteredTask: this.enteredTask,
         completed: false,
       });
 
-      // Grab the data before its added
+      // Cache the enteredTask
       this.duplicateCache = this.enteredTask;
 
       // Clear the input

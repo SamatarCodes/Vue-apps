@@ -21,7 +21,11 @@
             <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-sm">
                 <!-- inbox container -->
                 <div class="inside-contatiner px-5">
-                    <h4 class="py-4">Inbox</h4>
+                    <div class="title flex items-center">
+                        <i class="far fa-list-alt mr-2"></i>
+                        <h4 class="py-4">Inbox</h4>
+                    </div>
+
                     <!-- add new task input field -->
                     <input type="text" class="bg-inputColor px-2 py-2 text-sm w-full text-white rounded-sm"
                         placeholder="Add a new Task. Press Enter to save" v-model="enteredTask" @keyup.enter="addTask">

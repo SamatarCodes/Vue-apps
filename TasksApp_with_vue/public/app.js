@@ -3,6 +3,7 @@ const app = Vue.createApp({
     return {
       enteredTask: '',
       beforeEdit: '',
+      duplicateCache: '',
       // Task to loop over
       tasks: [
         {
@@ -17,16 +18,36 @@ const app = Vue.createApp({
       completedTasks: [],
     };
   },
+  computed: {
+    checkDuplicateTask() {
+      if (
+        (this.enteredTask !== '') &
+        (this.enteredTask.toLowerCase() === this.duplicateCache.toLowerCase())
+      ) {
+        return `This task '${this.duplicateCache}' already exist`;
+      }
+    },
+  },
 
   methods: {
     addTask() {
       if (this.enteredTask.trim().length === 0) {
         return;
       }
+
+      // Check if task already exist
+      if (
+        this.enteredTask.toLowerCase() === this.duplicateCache.toLowerCase()
+      ) {
+        return;
+      }
       this.tasks.push({
         enteredTask: this.enteredTask,
         completed: false,
       });
+
+      // Grab the data before its added
+      this.duplicateCache = this.enteredTask;
 
       // Clear the input
       this.enteredTask = '';
@@ -48,7 +69,6 @@ const app = Vue.createApp({
     },
     // delete task
     deleteTask(taskIndex) {
-      // FORGOT THIS PART
       // use splice method to remove the task from the tasks array
       this.tasks.splice(taskIndex, 1);
     },

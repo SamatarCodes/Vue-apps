@@ -17,8 +17,8 @@
 
 <body>
     <main id="app">
-        <div class="font-roboto min-h-screen bg-gray-200 py-6 flex flex-col items-center justify-center sm:py-12  ">
-            <div class="pb-10 text-white bg-darkBackground w-full max-w-xl">
+        <div class="font-roboto min-h-screen bg-gray-200 py-6 flex flex-col items-center justify-center sm:py-12">
+            <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-sm">
                 <!-- inbox container -->
                 <div class="inside-contatiner px-5">
                     <h4 class="py-4">Inbox</h4>
@@ -30,7 +30,7 @@
                             remaining</h5>
                         <!-- Tasks list goes here -->
                         <ul class="text-sm text-gray-300 pr-2">
-                            <li class="border-b-1 border-gray-700  py-2 flex items-center hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500 "
+                            <li class="border-b-1 border-gray-700  px-4 py-2 flex items-center hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500 "
                                 v-for="(task, index) in tasks" :key="index">
                                 <!-- checkbox -->
                                 <input type="checkbox"
@@ -61,8 +61,8 @@
                             <i class="mr-1 text-gray-400 fas fa-play fa-xs"></i>
                             Completed
                         </h6>
-                        <ul class="text-sm text-gray-300 pl-3">
-                            <li class="border-b-1 border-gray-700  pl-3 py-2 flex items-center hover:bg-hoverColor"
+                        <ul class="text-sm text-gray-300">
+                            <li class="border-b-1 border-gray-700 px-4  py-2 flex items-center hover:bg-hoverColor"
                                 v-for="(task, index) in completedTasks" :key="index">
                                 <!-- checkbox -->
                                 <input type="checkbox"

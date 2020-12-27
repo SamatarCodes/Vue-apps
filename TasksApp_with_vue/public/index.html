@@ -19,27 +19,25 @@
     <main id="app">
         <div class="text-white font-padauk min-h-screen bg-gray-200 py-6 flex items-center justify-center sm:py-12 ">
             <div class="container flex justify-center">
-                <div class="sidebar bg-sidebarColor">
-                    <div class="sidebar__inner  w-52 pt-2  ">
+                <div class="sidebar bg-sidebarColor rounded-l-sm rounded-bl-sm">
+                    <div class="sidebar__inner  w-48 pt-2  ">
                         <!-- sidebar title -->
-                        <div class="title flex items-center">
+                        <div class="pl-3 title flex items-center">
                             <i class="far fa-list-alt mr-2"></i>
                             <h3>Task Entry</h3>
                         </div>
                         <!-- sidebar menu -->
                         <ul class="mt-8 text-sm text-gray-300">
-                            <li
-                                class=" py-2 pl-2  hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500">
-                                <a href="#" class="flex items-baseline pr-3">
-                                    <i class="fas fa-envelope fa-xs mr-2"></i>
+                            <li class="pl-3  hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500">
+                                <a href="#" class="py-2  flex items-baseline pr-3">
+                                    <i class="fas fa-envelope fa-sm mr-2"></i>
                                     <span>Inbox</span>
                                     <span class="ml-auto text-green-600">{{tasks.length}}</span>
                                 </a>
                             </li>
-                            <li
-                                class=" py-2 pl-2  hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500">
-                                <a href="#" class="flex items-baseline pr-3">
-                                    <i class="far fa-calendar-alt fa-xs mr-2"></i>
+                            <li class="  pl-3  hover:bg-hoverColor group-hover:opacity-100 transition-all duration-500">
+                                <a href="#" class=" py-2 flex items-baseline pr-3">
+                                    <i class="far fa-calendar-alt fa-sm mr-2"></i>
                                     <span>Tomorrow</span>
                                     <span class="ml-auto">1</span>
                                 </a>
@@ -49,13 +47,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-sm">
+                <!-- right side -->
+                <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-r-sm rounded-br-sm">
                     <!-- inbox container -->
                     <div class="inside-contatiner px-5">
                         <div class="title flex items-center">
 
                             <i class="fas fa-envelope  mr-2"></i>
-                            <h4 class="py-4">Inbox</h4>
+                            <h4 class="py-4 text-2xl font-bold">Inbox</h4>
                         </div>
 
                         <!-- add new task input field -->

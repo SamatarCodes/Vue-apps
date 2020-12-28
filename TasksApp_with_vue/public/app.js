@@ -27,6 +27,7 @@ const app = Vue.createApp({
   methods: {
     addTask() {
       // If empty task, return
+      console.log(this.beforeEdit);
       if (
         this.enteredTask.trim().length === 0 ||
         this.enteredTask.trim().toLowerCase() ===
@@ -95,6 +96,7 @@ const app = Vue.createApp({
       if (task.enteredTask.trim().length === 0) {
         task.enteredTask = this.beforeEdit;
       }
+      this.duplicateCache = task.enteredTask;
       task.editing = !task.editing;
     },
     cancelEdit(task) {

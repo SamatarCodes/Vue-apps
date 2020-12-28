@@ -75,6 +75,7 @@ const app = Vue.createApp({
       this.tasks.push({
         enteredTask: task.completedTask,
         completed: false,
+        editing: false,
       });
       // Remove it from the completed task array
       const that = this;
@@ -87,16 +88,18 @@ const app = Vue.createApp({
       // Grab the data before it's edited
       this.beforeEdit = task.enteredTask;
       // Change the editing state
-      console.log(task);
       task.editing = !task.editing;
       this.$nextTick(() => this.$refs.input.focus());
     },
     doneEdit(task) {
-      // if empty string, set task to before edit task
+      // if empty string, set task to before task was edited
       if (task.enteredTask.trim().length === 0) {
         task.enteredTask = this.beforeEdit;
       }
+      // Set the newly task.entered to duplicateCached
       this.duplicateCache = task.enteredTask;
+      console.info(this.duplicateCache, task.enteredTask);
+      // Change editing state
       task.editing = !task.editing;
     },
     cancelEdit(task) {

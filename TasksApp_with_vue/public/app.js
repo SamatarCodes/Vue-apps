@@ -5,13 +5,7 @@ const app = Vue.createApp({
       beforeEdit: '',
       duplicateCache: '',
       // Task to loop over
-      tasks: [
-        {
-          enteredTask: 'Finish Vue',
-          completed: false,
-          editing: false,
-        },
-      ],
+      tasks: [],
       // list of checkboxes
       taskArray: [],
       // completed task array
@@ -35,16 +29,18 @@ const app = Vue.createApp({
       // If empty task, return
       if (
         this.enteredTask.trim().length === 0 ||
-        this.enteredTask.toLowerCase() === this.duplicateCache.toLowerCase()
+        this.enteredTask.trim().toLowerCase() ===
+          this.duplicateCache.trim().toLowerCase()
       ) {
         return;
+      } else {
+        // Add the task to task array
+        this.tasks.push({
+          enteredTask: this.enteredTask,
+          completed: false,
+          editing: false,
+        });
       }
-
-      // Add the task to task array
-      this.tasks.push({
-        enteredTask: this.enteredTask,
-        completed: false,
-      });
 
       // Cache the enteredTask
       this.duplicateCache = this.enteredTask;
@@ -90,6 +86,7 @@ const app = Vue.createApp({
       // Grab the data before it's edited
       this.beforeEdit = task.enteredTask;
       // Change the editing state
+      console.log(task);
       task.editing = !task.editing;
       this.$nextTick(() => this.$refs.input.focus());
     },

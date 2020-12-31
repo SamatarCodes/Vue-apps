@@ -3,7 +3,6 @@ const app = Vue.createApp({
     return {
       enteredTask: '',
       beforeEdit: '',
-      duplicateCache: '',
       cacheTasks: [],
       textColor: '',
       foundWord: false,
@@ -20,8 +19,6 @@ const app = Vue.createApp({
     checkDuplicateTask() {
       if (
         (this.enteredTask !== '') &
-        // (this.enteredTask.trim().toLowerCase() ===
-        //   this.duplicateCache.toLowerCase())
         this.cacheTasks.includes(this.enteredTask.trim().toLowerCase())
       ) {
         return `This task '${this.enteredTask.trim()}' already exist`;
@@ -53,9 +50,6 @@ const app = Vue.createApp({
         this.cacheTasks.push(this.enteredTask);
       }
 
-      // Cache the enteredTask
-      //this.duplicateCache = this.enteredTask;
-
       // Clear the input
       this.enteredTask = '';
     },
@@ -78,6 +72,8 @@ const app = Vue.createApp({
     deleteTask(taskIndex) {
       // use splice method to remove the task from the tasks array
       this.tasks.splice(taskIndex, 1);
+      // Delete it from the cache tasks as well
+      this.cacheTasks.splice(taskIndex, 1);
     },
     uncompleteTask(e, task, index) {
       task.completed = e.target.checked;
@@ -107,7 +103,7 @@ const app = Vue.createApp({
         task.enteredTask = this.beforeEdit;
       }
       // Set the newly task.entered to duplicateCached
-      //this.duplicateCache = task.enteredTask;
+
       this.cacheTasks.push(task.enteredTask);
       // Change editing state
       task.editing = !task.editing;

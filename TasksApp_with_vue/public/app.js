@@ -4,6 +4,10 @@ const app = Vue.createApp({
       enteredTask: '',
       beforeEdit: '',
       duplicateCache: '',
+      cacheTasks: [],
+      textColor: '',
+      foundWord: false,
+      word: '',
       // Task to loop over
       tasks: [],
       // list of checkboxes
@@ -16,35 +20,41 @@ const app = Vue.createApp({
     checkDuplicateTask() {
       if (
         (this.enteredTask !== '') &
-        (this.enteredTask.trim().toLowerCase() ===
-          this.duplicateCache.toLowerCase())
+        // (this.enteredTask.trim().toLowerCase() ===
+        //   this.duplicateCache.toLowerCase())
+        this.cacheTasks.includes(this.enteredTask.trim().toLowerCase())
       ) {
-        return `This task '${this.duplicateCache}' already exist`;
+        return `This task '${this.enteredTask.trim()}' already exist`;
       }
+    },
+    addClass() {
+      if (this.enteredTask.includes('tomorrow')) {
+        return (this.textColor = 'blue');
+      }
+      this.textColor = 'white';
     },
   },
 
   methods: {
     addTask() {
       // If empty task, return
-      console.log(this.beforeEdit);
+
       if (
-        this.enteredTask.trim().length === 0 ||
-        this.enteredTask.trim().toLowerCase() ===
-          this.duplicateCache.trim().toLowerCase()
+        this.cacheTasks.includes(this.enteredTask.toLowerCase().trim()) ||
+        this.enteredTask.trim().length === 0
       ) {
         return;
       } else {
-        // Add the task to task array
         this.tasks.push({
           enteredTask: this.enteredTask,
           completed: false,
           editing: false,
         });
+        this.cacheTasks.push(this.enteredTask);
       }
 
       // Cache the enteredTask
-      this.duplicateCache = this.enteredTask;
+      //this.duplicateCache = this.enteredTask;
 
       // Clear the input
       this.enteredTask = '';
@@ -97,8 +107,8 @@ const app = Vue.createApp({
         task.enteredTask = this.beforeEdit;
       }
       // Set the newly task.entered to duplicateCached
-      this.duplicateCache = task.enteredTask;
-      console.info(this.duplicateCache, task.enteredTask);
+      //this.duplicateCache = task.enteredTask;
+      this.cacheTasks.push(task.enteredTask);
       // Change editing state
       task.editing = !task.editing;
     },

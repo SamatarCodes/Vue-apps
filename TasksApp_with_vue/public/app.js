@@ -5,7 +5,6 @@ const app = Vue.createApp({
       beforeEdit: '',
       cacheTasks: [],
       textColor: '',
-      foundWord: false,
       // Task to loop over
       tasks: [],
       // list of checkboxes

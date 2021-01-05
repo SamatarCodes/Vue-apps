@@ -69,8 +69,8 @@
 
                         </div>
                         <div class="overflow-y-auto mt-4 flex flex-col h-56">
-                            <h5 class="pl-3 pb-3 text-xs text-blue-700">{{checkDuplicateTask}} </h5>
-                            <h5 class=" pl-3 pb-3 text-xs text-red-700">You have {{tasks.length}} tasks
+                            <h5 class="pl-3 pb-3 text-sm text-yellow-500">{{checkDuplicateTask}} </h5>
+                            <h5 class=" pl-3 pb-3 text-sm text-red-700">You have {{tasks.length}} tasks
                                 remaining</h5>
                             <!-- Tasks list goes here -->
                             <ul class="text-sm text-gray-300 pr-2">
@@ -78,7 +78,7 @@
                                     v-for="(task, index) in tasks" :key="index">
                                     <!-- checkbox -->
                                     <input type="checkbox"
-                                        class="mr-3 form-checkbox h-3 w-3 tex∂t-gray-700  bg-transparent  border border-gray-700 rounded-sm"
+                                        class="mr-3 form-checkbox h-3 w-3 text-gray-700  bg-transparent  border border-gray-700 rounded-sm"
                                         :value=task @change="selectCheckbox($event, task, index)" v-model="taskArray" />
 
                                     <div class="task-item-left">

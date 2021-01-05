@@ -92,7 +92,7 @@ const app = Vue.createApp({
         that.completedTasks.splice(index, 1);
       }, 400);
       // Add to cachetasks array as well
-      this.cacheTasks.push(task.completed.toLowerCase().trim());
+      this.cacheTasks.push(task.completedTask.toLowerCase().trim());
     },
 
     editTask(task) {

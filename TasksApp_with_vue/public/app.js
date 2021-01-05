@@ -9,7 +9,7 @@ const app = Vue.createApp({
       // Task to loop over
       tasks: [],
       // list of checkboxes
-      //taskArray: [],
+      taskArray: [],
       // completed task array
       completedTasks: [],
     };
@@ -67,6 +67,9 @@ const app = Vue.createApp({
       setTimeout(() => {
         that.tasks.splice(index, 1);
       }, 400);
+
+      // Remove from cachearray
+      this.cacheTasks.splice(index, 1);
     },
     // delete task
     deleteTask(taskIndex) {
@@ -88,6 +91,8 @@ const app = Vue.createApp({
       setTimeout(() => {
         that.completedTasks.splice(index, 1);
       }, 400);
+      // Add to cachetasks array as well
+      this.cacheTasks.push(task.completed.toLowerCase().trim());
     },
 
     editTask(task) {

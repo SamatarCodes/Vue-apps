@@ -47,7 +47,7 @@
                         </ul>
                     </div>
                 </div>
-                <!-- right side -->
+                <!--************  right side ************ -->
                 <div class="pb-10 text-white bg-darkBackground w-full max-w-xl rounded-r-sm rounded-br-sm">
                     <!-- inbox container -->
                     <div class="inside-contatiner px-5">
@@ -91,7 +91,11 @@
                                             @keyup.enter="doneEdit(task, index)" @blur="doneEdit(task)" type="text"
                                             v-model="task.enteredTask" @keyup.esc="cancelEdit(task)" ref="input">
                                     </div>
-                                    <i class="fas fa-trash-alt ml-auto pr-2" @click="deleteTask(index)"></i>
+                                    <!--  -->
+                                    <section class="ml-auto">
+                                        <span class="text-xs text-blue-600 mr-4 ">Today</span>
+                                        <i class="fas fa-trash-alt  pr-2" @click="deleteTask(index)"></i>
+                                    </section>
                                 </li>
 
 

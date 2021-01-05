@@ -6,11 +6,10 @@ const app = Vue.createApp({
       cacheTasks: [],
       textColor: '',
       foundWord: false,
-      word: '',
       // Task to loop over
       tasks: [],
       // list of checkboxes
-      taskArray: [],
+      //taskArray: [],
       // completed task array
       completedTasks: [],
     };
@@ -18,7 +17,7 @@ const app = Vue.createApp({
   computed: {
     checkDuplicateTask() {
       if (
-        (this.enteredTask !== '') &
+        // (this.enteredTask !== '') &
         this.cacheTasks.includes(this.enteredTask.trim().toLowerCase())
       ) {
         return `This task '${this.enteredTask.trim()}' already exist`;
@@ -34,23 +33,24 @@ const app = Vue.createApp({
 
   methods: {
     addTask() {
-      // If empty task, return
-
+      // If user tries to add empty task or it's already included in the cache tasks, then return - cannot add
       if (
         this.cacheTasks.includes(this.enteredTask.toLowerCase().trim()) ||
         this.enteredTask.trim().length === 0
       ) {
         return;
       } else {
+        // if field is not empty or task is not included in cachetasks, then add to tasks array
         this.tasks.push({
           enteredTask: this.enteredTask,
           completed: false,
           editing: false,
         });
-        this.cacheTasks.push(this.enteredTask);
+        // add this task to cacheTasks array
+        this.cacheTasks.push(this.enteredTask.toLowerCase());
       }
 
-      // Clear the input
+      // Clear the input field
       this.enteredTask = '';
     },
     selectCheckbox(e, task, index) {
@@ -97,14 +97,14 @@ const app = Vue.createApp({
       task.editing = !task.editing;
       this.$nextTick(() => this.$refs.input.focus());
     },
-    doneEdit(task) {
+    doneEdit(task, index) {
       // if empty string, set task to before task was edited
       if (task.enteredTask.trim().length === 0) {
         task.enteredTask = this.beforeEdit;
       }
       // Set the newly task.entered to duplicateCached
-
-      this.cacheTasks.push(task.enteredTask);
+      this.cacheTasks.push(task.enteredTask.toLowerCase().trim());
+      this.cacheTasks.splice(index, 1);
       // Change editing state
       task.editing = !task.editing;
     },

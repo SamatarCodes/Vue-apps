@@ -10,6 +10,7 @@
         :tasks="tasks"
         @add-task="addTask"
         @checked="onChange"
+        @completed-checkbox="completedCheckbox"
       />
     </div>
   </div>
@@ -38,12 +39,12 @@ export default {
   },
   created() {
     this.tasks = [
-      {
-        id: 1,
-        enteredTask: 'Task 1',
-        completed: false,
-        editing: false,
-      },
+      // {
+      //   id: 1,
+      //   enteredTask: 'Task 1',
+      //   completed: false,
+      //   editing: false,
+      // },
      
     ];
   },
@@ -55,9 +56,8 @@ export default {
     onChange(id) {
       // Find the task that was clicked on 
       const clickedTask = this.tasks.find(task => task.id === id);
-      
-      // Once clicked, means its completed, so change the completed to true
-      clickedTask.completed = true; 
+
+      clickedTask.completed = !clickedTask.completed;
       // Add that task to completedTask
       this.completedTasks = [...this.completedTasks, clickedTask];
 
@@ -67,6 +67,16 @@ export default {
     removeTask(id) {
       // Remove it from the current uncompleted tasks list
       this.tasks = this.tasks.filter(task => task.id !== id);
+    },
+    completedCheckbox(id) {
+      // Find the completedTask that was checked 
+      const clickedCompletedTask = this.completedTasks.find(task => task.id === id);
+
+      // Set completedTask to a new array that contains all the tasks EXCEPT the one that was clicked on 
+      this.completedTasks = this.completedTasks.filter(task => task.id !== id);
+
+      // Add the clicked task back to regular tasks array and
+      this.tasks = [...this.tasks, clickedCompletedTask];
     },
   },
 };

@@ -2,7 +2,7 @@
   <!--************  right side ************ -->
   <div class="right__container">
     <!-- inbox container -->
-    <div class="inside-container px-5 border-2 border-green-500">
+    <div class="inside-container px-5">
       <!-- Inbox title container -->
       <div class="title flex items-center ">
         <i class="fas fa-envelope  mr-2"></i>
@@ -18,7 +18,7 @@
         <Tasks :tasks="tasks" @checked="checked" />
       </div>
       <!-- Completed section  -->
-      <CompletedSection :completedTasks="completedTasks" />
+      <CompletedSection :completedTasks="completedTasks" @completed-checkbox="completedCheckbox"/>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ import Input from './Input.vue';
 import CompletedSection from './CompletedSection.vue';
 
 export default {
-  emits: ['add-task', 'checked'],
+  emits: ['add-task', 'checked', 'completed-checkbox'],
   props: ['tasks', 'completedTasks'],
   components: { Tasks, Input, CompletedSection },
   data() {
@@ -43,6 +43,9 @@ export default {
     },
     checked(id) {
       this.$emit('checked', id);
+    },
+    completedCheckbox(id) {
+      this.$emit('completed-checkbox', id);
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <ul class="text-sm text-gray-300 pr-2 border-2 border-blue-700">
+  <ul class="text-sm text-gray-300 pr-2 ">
     <li
       v-for="task in tasks"
       :key="task.id"

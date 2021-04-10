@@ -18,11 +18,11 @@
           class="mr-3 form-checkbox h-3 w-3 text-gray-700  bg-transparent  border border-gray-700 rounded-sm "
           :value="task"
           
-          @click="check"
+          @change="$emit('completed-checkbox', task.id)"
           v-model="task.completed"
         />
 <!-- @change="uncompleteTask($event, task, index)" -->
-        <span class="text-gray-600" :class="{ 'line-through': task.completed }">{{ task.enteredTask }} {{task.index}}
+        <span class="text-gray-600" :class="{ 'line-through': task.completed }">{{ task.enteredTask }} 
         </span>
       </li>
     </ul>

@@ -5,7 +5,12 @@
       <!-- sidebar component -->
       <Sidebar />
       <!--************  right side ************ -->
-      <RightContainer :tasks="tasks" @add-task="addTask" />
+      <RightContainer
+        :completedTasks="completedTasks"
+        :tasks="tasks"
+        @add-task="addTask"
+        @checked="onChange"
+      />
     </div>
   </div>
 </template>
@@ -21,6 +26,14 @@ export default {
     return {
       enteredTask: '',
       tasks: [],
+      completedTasks: [
+        {
+          id: 1,
+          enteredTask: 'Task 1',
+          completed: true,
+          editing: false,
+        },
+      ],
     };
   },
   created() {
@@ -41,8 +54,21 @@ export default {
   },
   methods: {
     addTask(newTask) {
-      console.log(newTask, 'app');
+      // spread it across and add the new task 
       this.tasks = [...this.tasks, newTask];
+    },
+    onChange(id) {
+      // Find the task that was clicked on 
+      const clickedTask = this.tasks.find(task => task.id === id);
+      
+      // Add that task to completedTask
+      this.completedTasks = [...this.completedTasks, clickedTask];
+     
+      this.removeTask(id);
+    },
+    removeTask(id) {
+      // Remove it the current uncompleted tasks list
+      this.tasks = this.tasks.filter(task => task.id !== id);
     },
   },
 };

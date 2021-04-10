@@ -10,7 +10,7 @@
         type="checkbox"
         class="mr-3 form-checkbox h-3 w-3 text-gray-700  bg-transparent  border border-gray-700 rounded-sm"
         :value="task"
-        @change="clicked"
+        @change="$emit('checked', task.id)"
       />
       <!-- @change="selectCheckbox($event, task, index)" -->
       <!-- vmodel="taskArray" -->
@@ -32,8 +32,8 @@
 export default {
   props: ['tasks'],
   methods: {
-    clicked() {
-      console.log(this.tasks);
+    clicked(completed, id) {
+      console.log(completed, id);
     },
   },
 };

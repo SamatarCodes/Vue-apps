@@ -27,12 +27,12 @@ export default {
       enteredTask: '',
       tasks: [],
       completedTasks: [
-        {
-          id: 1,
-          enteredTask: 'Task 1',
-          completed: true,
-          editing: false,
-        },
+        // {
+        //   id: 1,
+        //   enteredTask: 'Task 1',
+        //   completed: true,
+        //   editing: false,
+        // },
       ],
     };
   },
@@ -44,12 +44,7 @@ export default {
         completed: false,
         editing: false,
       },
-      {
-        id: 2,
-        enteredTask: 'Task 2',
-        completed: false,
-        editing: false,
-      },
+     
     ];
   },
   methods: {
@@ -61,13 +56,16 @@ export default {
       // Find the task that was clicked on 
       const clickedTask = this.tasks.find(task => task.id === id);
       
+      // Once clicked, means its completed, so change the completed to true
+      clickedTask.completed = true; 
       // Add that task to completedTask
       this.completedTasks = [...this.completedTasks, clickedTask];
-     
+
+      // Then remove it from current uncompleted task list
       this.removeTask(id);
     },
     removeTask(id) {
-      // Remove it the current uncompleted tasks list
+      // Remove it from the current uncompleted tasks list
       this.tasks = this.tasks.filter(task => task.id !== id);
     },
   },

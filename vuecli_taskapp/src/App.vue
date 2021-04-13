@@ -27,56 +27,43 @@ export default {
     return {
       enteredTask: '',
       tasks: [],
-      completedTasks: [
-        // {
-        //   id: 1,
-        //   enteredTask: 'Task 1',
-        //   completed: true,
-        //   editing: false,
-        // },
-      ],
+      completedTasks: [],
     };
-  },
-  created() {
-    this.tasks = [
-      // {
-      //   id: 1,
-      //   enteredTask: 'Task 1',
-      //   completed: false,
-      //   editing: false,
-      // },
-     
-    ];
   },
   methods: {
     addTask(newTask) {
-      // spread it across and add the new task 
+      // spread it across and add the new task
+      // newTask is an object
+
       this.tasks = [...this.tasks, newTask];
     },
     onChange(id) {
-      // Find the task that was clicked on 
+      // Find the task that was clicked on
       const clickedTask = this.tasks.find(task => task.id === id);
-
       clickedTask.completed = !clickedTask.completed;
       // Add that task to completedTask
-      this.completedTasks = [...this.completedTasks, clickedTask];
-
+      this.completedTasks.push(clickedTask);
       // Then remove it from current uncompleted task list
-      this.removeTask(id);
+      // BUG;
+      setTimeout(() => {
+        this.removeTask(id);
+      }, 150);
     },
     removeTask(id) {
       // Remove it from the current uncompleted tasks list
       this.tasks = this.tasks.filter(task => task.id !== id);
     },
     completedCheckbox(id) {
-      // Find the completedTask that was checked 
+      // Find the completedTask that was checked
       const clickedCompletedTask = this.completedTasks.find(task => task.id === id);
+      // Set completedTask to a new array that contains all the tasks EXCEPT the one that was clicked on
+      setTimeout(() => {
+        this.completedTasks = this.completedTasks.filter(task => task.id !== id);
+      }, 150);
 
-      // Set completedTask to a new array that contains all the tasks EXCEPT the one that was clicked on 
-      this.completedTasks = this.completedTasks.filter(task => task.id !== id);
-
-      // Add the clicked task back to regular tasks array and
-      this.tasks = [...this.tasks, clickedCompletedTask];
+      // Add the clicked task back to regular tasks array
+      // this.tasks = [...this.tasks, clickedCompletedTask];
+      this.tasks.push(clickedCompletedTask);
     },
   },
 };

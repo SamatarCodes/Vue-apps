@@ -31,11 +31,6 @@
 <script>
 export default {
   props: ['tasks'],
-  methods: {
-    clicked(completed, id) {
-      console.log(completed, id);
-    },
-  },
 };
 </script>
 

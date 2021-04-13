@@ -20,14 +20,18 @@ export default {
   },
   methods: {
     addTask() {
-      const newTask = {
-        id: Math.floor(Math.random() * 1000),
-        enteredTask: this.enteredTask,
-        completed: false,
-        editing: false,
-      };
+      // simple validation here
+      if (this.enteredTask.trim().length !== 0) {
+        const newTask = {
+          id: Math.floor(Math.random() * 1000),
+          enteredTask: this.enteredTask,
+          completed: false,
+          editing: false,
+        };
 
-      this.$emit('add-task', newTask);
+        this.$emit('add-task', newTask);
+      }
+
       // clear the input field
       this.enteredTask = '';
     },

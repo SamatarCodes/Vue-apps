@@ -16,11 +16,14 @@
           <div @dblclick="editTask(task)">{{ task.enteredTask }}</div>
         </div>
         <input
+          @click="focus"
           type="text"
           v-else
           class="inputEdit bg-transparent outline-none py-0 border-none px-0"
           v-model="task.enteredTask"
-          @keyup.enter="taskEdited(task)"
+          @keyup.enter="doneEdit(task)"
+          @blur="doneEdit(task)"
+          ref="editInput"
         />
       </div>
       <!--  -->
@@ -35,7 +38,6 @@
 
 <script>
 export default {
-  components: {},
   props: ['tasks'],
   data() {
     return {
@@ -48,15 +50,15 @@ export default {
       const editedState = task;
       // Now flip the state
       editedState.editing = true; // task.editing is now true
+      this.$nextTick(() => this.$refs.editInput.focus());
     },
-    taskEdited(task) {
+    doneEdit(task) {
       // when you hit enter
       // Set the task to the newly edite task
       const editedState = task;
       // Change the editing state to false
       editedState.editing = false;
       // Set the task.enteredTask to whatever it was edited to
-      console.log(task);
     },
   },
 };

@@ -12,7 +12,7 @@
       <!-- <Input :tasks="tasks" @add-task="$emit('add-task', newTask)" /> -->
       <Input @add-task="addTask" />
       <div class="overflow-y-auto mt-4 flex flex-col h-56">
-        <h5 class="pl-3 pb-3 text-sm text-yellow-500">checkDuplicate</h5>
+        <!-- <h5 class="pl-3 pb-3 text-sm text-yellow-500">checkDuplicate</h5> -->
         <h5 class=" pl-3 pb-3 text-sm text-red-700">You have {{ tasks.length }} tasks remaining</h5>
         <!-- Tasks list goes here -->
         <Tasks :tasks="tasks" @checked="checked" />

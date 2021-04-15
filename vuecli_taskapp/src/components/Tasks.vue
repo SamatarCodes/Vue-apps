@@ -23,6 +23,7 @@
           v-model="task.enteredTask"
           @keyup.enter="doneEdit(task)"
           @blur="doneEdit(task)"
+          @keyup.esc="cancelEdit(task)"
           ref="editInput"
         />
       </div>
@@ -42,12 +43,15 @@ export default {
   data() {
     return {
       editInput: '',
+      currentTaskvalue: '',
     };
   },
   methods: {
     editTask(task) {
       // set the edited inputField to whatever to the added task
       const editedState = task;
+      // store the current task
+      this.currentTaskvalue = task.enteredTask;
       // Now flip the state
       editedState.editing = true; // task.editing is now true
       this.$nextTick(() => this.$refs.editInput.focus());
@@ -59,6 +63,12 @@ export default {
       // Change the editing state to false
       editedState.editing = false;
       // Set the task.enteredTask to whatever it was edited to
+    },
+    cancelEdit(task) {
+      const task1 = task;
+      // once the esc button is press, set the task to whatever it was before it was double clicked
+      task1.enteredTask = this.currentTaskvalue;
+      task1.editing = false;
     },
   },
 };
